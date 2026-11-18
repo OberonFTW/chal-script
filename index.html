@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge Rush Script</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --success: #22c55e;
+            --border-color: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.025em;
+            color: var(--text-primary);
+        }
+
+        .site {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .site p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            word-break: break-all;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            max-height: 120px;
+            overflow-y: auto;
+            font-family: monospace;
+            margin-bottom: 12px;
+        }
+
+        .copy-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+
+        .copy-btn.success {
+            background-color: var(--success);
+        }
+
+        .footer-credit {
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+
+        .footer-credit:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Challenge Rush Script</h1>
+        <div class="site">
+            <p id="base64-text">data:text/html;charset=utf-8;base64,PCFET0NUWVBFIGh0bWw+CjxodG1sPgo8aGVhZD4KICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CiAgPHRpdGxlPkdlb21ldHJ5IEFuYWx5c2lzIERhc2hib2FyZDwvdGl0bGU+CiAgPHN0eWxlPgogICAgYm9keSB7CiAgICAgIHRleHQtYWxpZ246IGNlbnRlcjsKICAgICAgcGFkZGluZy10b3A6IDEwMHB4OwogICAgICBmb250LWZhbWlseTogc2Fucy1zZXJpZjsKICAgICAgYmFja2dyb3VuZDogI2YwZjBmMDsKICAgIH0KCiAgICBidXR0b24gewogICAgICBwYWRkaW5nOiAyMHB4IDQwcHg7CiAgICAgIGZvbnQtc2l6ZTogMThweDsKICAgICAgY3Vyc29yOiBwb2ludGVyOwogICAgICBib3JkZXItcmFkaXVzOiA4cHg7CiAgICAgIGJvcmRlcjogMXB4IHNvbGlkICNjY2M7CiAgICAgIGJhY2tncm91bmQ6IHdoaXRlOwogICAgICBib3gtc2hhZG93OiAwIDRweCA2cHggcmdiYSgwLDAsMCwuMSk7CiAgICB9CiAgPC9zdHlsZT4KPC9oZWFkPgo8Ym9keT4KICA8aDI+R2VvbWV0cnkgQW5hbHlzaXMgRGFzaGJvYXJkPC9oMj4KICA8cD5DbGljayB0byBsYXVuY2ggdGhlIGludGVyYWN0aXZlIHNpbXVsYXRpb24gd2luZG93LjwvcD4KCiAgPGJ1dHRvbiBvbmNsaWNrPSJsYXVuY2hXaW5kb3coKSI+TGF1bmNoIFNpbXVsYXRpb248L2J1dHRvbj4KCiAgPHNjcmlwdD4KICAgIGZ1bmN0aW9uIGxhdW5jaFdpbmRvdygpIHsKICAgICAgY29uc3Qgd2luID0gd2luZG93Lm9wZW4oCiAgICAgICAgIiIsCiAgICAgICAgIl9ibGFuayIsCiAgICAgICAgIndpZHRoPTEwMDAsaGVpZ2h0PTcwMCxtZW51YmFyPW5vLHN0YXR1cz1ubyx0b29sYmFyPW5vLGxvY2F0aW9uPW5vIgogICAgICApOwoKICAgICAgaWYgKCF3aW4pIHsKICAgICAgICBhbGVydCgiVGhlIGJyb3dzZXIgYmxvY2tlZCB0aGUgcG9wLXVwLiIpOwogICAgICAgIHJldHVybjsKICAgICAgfQoKICAgICAgd2luLmRvY3VtZW50LnRpdGxlID0gIlNpbXVsYXRpb24iOwoKICAgICAgY29uc3QgaWZyYW1lID0gd2luLmRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoImlmcmFtZSIpOwogICAgICBpZnJhbWUuc3JjID0gImh0dHBzOi8vY2hhbGxlbmdlcnVzaC5jb20vP3N1aWNpZGVwcmV2ZW50aW9ubGlmZWxpbmUub3JnIjsKICAgICAgaWZyYW1lLnN0eWxlLmNzc1RleHQgPQogICAgICAgICJwb3NpdGlvbjpmaXhlZDt0b3A6MDtsZWZ0OjA7d2lkdGg6MTAwJTtoZWlnaHQ6MTAwJTsiICsKICAgICAgICAiYm9yZGVyOjA7bWFyZ2luOjA7cGFkZGluZzowOyI7CgogICAgICB3aW4uZG9jdW1lbnQuYm9keS5zdHlsZS5tYXJnaW4gPSAiMCI7CiAgICAgIHdpbi5kb2N1bWVudC5ib2R5LmFwcGVuZENoaWxkKGlmcmFtZSk7CiAgICB9CiAgPC9zY3JpcHQ+CjxhIGhyZWY9Imh0dHBzOi8vbWF0dGlhc3cuZ2l0aHViLmlvL3NlbGYtY29udGFpbmVkLyIgdGFyZ2V0PSJfYmxhbmsiIHN0eWxlPSJiYWNrZ3JvdW5kOiByZ2JhKDIwLCA5MCwgMTgwLCAuMzUpO2JvdHRvbTogMDtkaXNwbGF5OiBibG9jaztmb250LXNpemU6IC44cmVtO2xlZnQ6IDA7b3BhY2l0eTogLjU7cGFkZGluZzogNHB4IDhweDtwb3NpdGlvbjogZml4ZWQ7Ij5DcmVhdGVkIHdpdGggV2ViIHBhZ2UgZGF0YSBVUkkgZ2VuZXJhdG9yLjwvYT48L2JvZHk+CjwvaHRtbD4=</p>
+            <button id="copy-btn" class="copy-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                Copy Base64 Data
+            </button>
+        </div>
+    </div>
+
+    <a href="https://mattiasw.github.io/self-contained/" target="_blank" class="footer-credit">Created with Web page data URI generator.</a>
+
+    <script>
+        document.getElementById('copy-btn').addEventListener('click', () => {
+            const textToCopy = document.getElementById('base64-text').innerText;
+            const btn = document.getElementById('copy-btn');
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                btn.classList.add('success');
+                btn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Copied to Clipboard!
+                `;
+
+                setTimeout(() => {
+                    btn.classList.remove('success');
+                    btn.innerHTML = `
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        Copy Base64 Data
+                    `;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        });
+    </script>
+</body>
+</html>
